@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Togro ,  Wireframes & UX System</title>
+<style>
+  :root{
+    /* Togro brand palette */
+    --lime:#bcd24a;
+    --lime-soft:#eef4d2;
+    --clay:#dfd3b0;
+    --charcoal:#3c4a48;
+    --slate:#5a625a;
+    --amber:#f3b21f;
+    --amber-soft:#fdecc4;
+    --sky:#a9c8d6;
+    --bone:#f3ecd9;
+
+    --bg:var(--bone);
+    --ink:var(--charcoal);
+    --muted:var(--slate);
+    --line:#dcd4b8;
+    --card:#fffaf0;
+    --accent:var(--lime);
+    --accent-ink:var(--charcoal);
+    --accent-soft:var(--lime-soft);
+    --warn:var(--amber);
+    --warn-soft:var(--amber-soft);
+    --chip:#ebe3c6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth;scroll-padding-top:64px}
+  .topnav{position:sticky;top:0;z-index:50;background:rgba(243,236,217,.92);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line);
+    display:flex;gap:18px;align-items:center;padding:12px 32px;flex-wrap:wrap;
+    font-size:13px}
+  .topnav a{color:var(--slate);text-decoration:none;padding:6px 10px;border-radius:8px;transition:.15s}
+  .topnav a:hover{background:var(--lime-soft);color:var(--charcoal)}
+  .topnav a.brand{font-weight:700;color:var(--charcoal);font-size:16px;letter-spacing:-.4px;margin-right:auto}
+  .topnav a.brand span{color:var(--slate);font-weight:400;font-size:12px;margin-left:6px}
+  .phone.click{cursor:pointer;transition:transform .25s ease, box-shadow .25s ease}
+  .phone.click:hover{transform:translateY(-4px);box-shadow:0 32px 56px -28px rgba(60,74,72,.4)}
+  header.top{padding:48px 32px 24px;max-width:1280px;margin:0 auto}
+  header.top h1{font-size:42px;letter-spacing:-1.2px;margin:0 0 8px}
+  header.top p{color:var(--muted);max-width:760px;margin:0}
+  .wrap{max-width:1280px;margin:0 auto;padding:24px 32px 80px}
+  h2.section{font-size:24px;letter-spacing:-.4px;margin:48px 0 8px;
+    border-top:1px solid var(--line);padding-top:32px}
+  h3{font-size:17px;margin:24px 0 8px}
+  p.lede{color:var(--muted);margin:0 0 16px;max-width:780px}
+  .grid{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+  .label{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+
+  /* SVG icon system */
+  .ico{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+  .ico.lg{width:28px;height:28px}
+  .ico.xl{width:42px;height:42px;stroke-width:1.5}
+
+  /* Phone wireframe */
+  .phone{
+    width:288px;height:600px;border:2px solid var(--ink);border-radius:40px;
+    background:#fff;position:relative;overflow:hidden;margin:0 auto;
+    box-shadow:0 24px 48px -28px rgba(19,32,26,.3);
+  }
+  .phone::before{content:"";position:absolute;top:10px;left:50%;
+    transform:translateX(-50%);width:96px;height:18px;background:var(--ink);border-radius:12px;z-index:5}
+  .screen{position:absolute;inset:38px 12px 12px;border-radius:24px;
+    background:var(--bg);overflow:hidden;display:flex;flex-direction:column}
+  .sbar{display:flex;justify-content:space-between;padding:8px 14px;font-size:10px;color:var(--muted)}
+  .ttl{padding:4px 16px 4px;font-weight:600;font-size:15px;letter-spacing:-.2px}
+  .sub{padding:0 16px 8px;font-size:11px;color:var(--muted)}
+  .body{flex:1;padding:0 12px;overflow:hidden}
+  .nav{display:flex;justify-content:space-around;padding:10px 6px;
+    border-top:1px solid var(--line);background:#fff;color:var(--muted)}
+  .nav .ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px}
+  .nav .ni.on{color:var(--accent)}
+
+  .block{background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:10px 12px;font-size:11px;margin:6px 0}
+  .block.acc{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+  .row{display:flex;gap:8px;align-items:center}
+  .pill{background:var(--chip);border-radius:999px;padding:3px 9px;
+    font-size:10px;color:var(--ink);display:inline-flex;align-items:center;gap:4px}
+  .pill.acc{background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .pill.warn{background:var(--warn-soft);color:var(--warn)}
+
+  /* Map */
+  .map{position:absolute;inset:38px 12px 56px;border-radius:24px;overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 38%, #d6e3b8 0 18%, transparent 19%),
+      radial-gradient(circle at 72% 62%, #dfeac0 0 22%, transparent 23%),
+      radial-gradient(circle at 50% 80%, #cfdfa8 0 14%, transparent 15%),
+      linear-gradient(135deg,#eef0d2,#e2e8c0)}
+  .map svg.path{position:absolute;inset:0;width:100%;height:100%}
+  .pin{position:absolute;width:16px;height:16px;border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);border:2px solid #fff;
+    box-shadow:0 3px 6px rgba(0,0,0,.25)}
+  .pin.h{background:var(--warn)}
+  .pin.r{background:var(--accent)}
+  .pin.f{background:#7a8a55}
+  .pulse{position:absolute;width:38px;height:38px;border-radius:50%;
+    border:2px solid var(--accent);opacity:.5;animation:pulse 2s ease-out infinite}
+  @keyframes pulse{0%{transform:scale(.4);opacity:.7}100%{transform:scale(1.3);opacity:0}}
+  .topbar{position:absolute;top:46px;left:24px;right:24px;background:#fff;
+    border:1px solid var(--line);border-radius:14px;padding:9px 12px;font-size:11px;
+    display:flex;justify-content:space-between;align-items:center;
+    box-shadow:0 4px 12px rgba(19,32,26,.06)}
+  .credchip{background:var(--accent);color:var(--charcoal);border-radius:999px;
+    padding:5px 11px;font-size:10px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+  .fab{position:absolute;right:24px;bottom:68px;width:54px;height:54px;
+    border-radius:50%;background:var(--accent);color:var(--charcoal);display:flex;
+    align-items:center;justify-content:center;
+    box-shadow:0 12px 24px -8px rgba(47,111,78,.65);z-index:3}
+  .fab::before{content:"";position:absolute;inset:-6px;border-radius:50%;
+    border:2px solid var(--accent);opacity:.35;animation:pulse 2.4s ease-out infinite}
+
+  /* Photo verify screen */
+  .verify-frame{position:relative;width:100%;height:170px;border-radius:14px;overflow:hidden;
+    background:linear-gradient(160deg,#4a5550,#2a332f);margin:6px 0}
+  .scan-line{position:absolute;left:8%;right:8%;height:2px;background:var(--accent);
+    box-shadow:0 0 12px var(--accent);animation:scan 2.2s ease-in-out infinite}
+  @keyframes scan{0%,100%{top:12%}50%{top:82%}}
+  .corner{position:absolute;width:18px;height:18px;border:2px solid #fff}
+  .corner.tl{top:8px;left:8px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+  .corner.tr{top:8px;right:8px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+  .corner.bl{bottom:8px;left:8px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+  .corner.br{bottom:8px;right:8px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+  .check-row{display:flex;align-items:center;gap:8px;font-size:11px;padding:5px 0;color:var(--muted)}
+  .check-row .tick{width:16px;height:16px;border-radius:50%;background:var(--accent-soft);
+    color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .check-row.done{color:var(--ink)}
+  .check-row.pending .tick{background:#eef1ec;color:var(--muted);animation:spin 1.4s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .progress{height:4px;background:var(--chip);border-radius:4px;overflow:hidden;margin:8px 0}
+  .progress span{display:block;height:100%;background:var(--accent);
+    width:62%;border-radius:4px;animation:grow 2.4s ease-out infinite}
+  @keyframes grow{0%{width:0}100%{width:100%}}
+
+  /* Reward burst animation */
+  .burst{position:relative;width:90px;height:90px;margin:8px auto}
+  .burst .ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);
+    animation:ringOut 2s ease-out infinite}
+  .burst .ring:nth-child(2){animation-delay:.6s}
+  .burst .ring:nth-child(3){animation-delay:1.2s}
+  @keyframes ringOut{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.4);opacity:0}}
+  .burst .core{position:absolute;inset:24px;border-radius:50%;background:var(--accent);
+    color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:700}
+
+  .twocol{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
+  @media (max-width:880px){.twocol{grid-template-columns:1fr}}
+  ul.clean{padding-left:18px;margin:8px 0}
+  ul.clean li{margin:4px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#eef1ec;font-weight:600}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:8px 0 24px}
+  .legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .callout{background:var(--accent-soft);border-left:3px solid var(--accent);
+    padding:14px 18px;border-radius:8px;margin:14px 0}
+
+  /* Desktop wireframe */
+  .desktop{border:2px solid var(--ink);border-radius:14px;background:#fff;overflow:hidden}
+  .desktop .chrome{background:#eef1ec;height:24px;display:flex;align-items:center;padding:0 10px;gap:6px}
+  .desktop .chrome i{width:10px;height:10px;border-radius:50%;background:#cdd4cb;display:inline-block}
+  .desktop .dbody{display:grid;grid-template-columns:200px 1fr;min-height:420px}
+  .dside{background:var(--charcoal);color:#dfd3b0;padding:20px 14px;font-size:13px}
+  .dside h4{color:#fff;margin:0 0 14px;font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+  .dside .item{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:8px;margin:2px 0}
+  .dside .item.on{background:#5a6a55;color:#fff}
+  .dmain{padding:22px 26px}
+  .dmain .stat{display:inline-block;border:1px solid var(--line);border-radius:10px;
+    padding:12px 16px;margin:0 8px 8px 0;min-width:130px}
+  .dmain .stat b{display:block;font-size:22px;letter-spacing:-.5px}
+  .dmain .stat span{font-size:11px;color:var(--muted)}
+  .qrow{display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:11px 0;font-size:13px}
+  .qrow .pill{margin-left:auto}
+  .qthumb{width:36px;height:36px;border-radius:6px;background:linear-gradient(135deg,#4a5550,#2a332f);flex-shrink:0}
+</style>
+</head>
+<body>
+
+<!-- ============ ICON DEFS ============ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-map" viewBox="0 0 24 24"><polygon points="2 6 9 3 15 6 22 3 22 18 15 21 9 18 2 21 2 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M6 17V9a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-4a4 4 0 0 0 0 8"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M21 12V8a2 2 0 0 0-2-2H5a2 2 0 0 1 0-4h13"/><path d="M3 6v12a2 2 0 0 0 2 2h16v-4"/><circle cx="17" cy="14" r="1.5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 2 21h20z"/><line x1="12" y1="10" x2="12" y2="15"/><circle cx="12" cy="18" r=".6" fill="currentColor"/></symbol>
+    <symbol id="i-cow" viewBox="0 0 24 24"><path d="M5 10c0-3 3-5 7-5s7 2 7 5v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5z"/><circle cx="9" cy="12" r=".8" fill="currentColor"/><circle cx="15" cy="12" r=".8" fill="currentColor"/><path d="M3 8c-1 0-1 3 1 3M21 8c1 0 1 3-1 3"/></symbol>
+    <symbol id="i-fence" viewBox="0 0 24 24"><path d="M5 21V7l2-3 2 3v14M15 21V7l2-3 2 3v14M3 11h18M3 16h18"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 3s4 4 4 9a4 4 0 0 1-8 0c0-2 1-3 1-3s0 2 2 2c0-3-1-5 1-8z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z"/><line x1="5" y1="19" x2="14" y2="10"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M16 10h2a3 3 0 0 1 0 6h-2"/><line x1="7" y1="2" x2="7" y2="5"/><line x1="11" y1="2" x2="11" y2="5"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V3h9l9 9-9 9z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v6M12 15v6M3 12h6M15 12h6M6 6l4 4M14 14l4 4M18 6l-4 4M10 14l-4 4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><polyline points="9 12 11 14 15 10"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5"/><path d="M3 9v11h18V9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><line x1="4" y1="20" x2="20" y2="20"/><rect x="6" y="12" width="3" height="8"/><rect x="11" y="6" width="3" height="14"/><rect x="16" y="9" width="3" height="11"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><line x1="5" y1="21" x2="5" y2="4"/><path d="M5 4h12l-2 4 2 4H5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-7 7-13a7 7 0 0 0-14 0c0 6 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="3" y1="9" x2="6" y2="9"/><line x1="3" y1="15" x2="6" y2="15"/><line x1="18" y1="9" x2="21" y2="9"/><line x1="18" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="6"/><line x1="15" y1="3" x2="15" y2="6"/><line x1="9" y1="18" x2="9" y2="21"/><line x1="15" y1="18" x2="15" y2="21"/></symbol>
+    <symbol id="i-loc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></symbol>
+  </defs>
+</svg>
+
+<nav class="topnav">
+  <a href="#design" class="brand">togro<span>· wireframes</span></a>
+  <a href="#walker">Walker</a>
+  <a href="#verify">Verification</a>
+  <a href="#farmer">Farmer</a>
+  <a href="#hub">Farm hub</a>
+  <a href="#business">Business</a>
+  <a href="#admin">Admin</a>
+  <a href="#lifecycle">Lifecycle</a>
+  <a href="#credits">Credits</a>
+</nav>
+
+<header class="top" id="design">
+  <h1>Togro ,  Wireframes & UX System</h1>
+  <p>Mobile-first wireframes and end-to-end UX for the four Togro roles. This revision adds a dedicated photo-verification flow and replaces emoji with a custom line-icon set, scan-line, pulse, and ring animations.</p>
+</header>
+
+<div class="wrap">
+
+<h2 class="section">1 · Design language</h2>
+<p class="lede">Togro should feel calm, confident, and tactile ,  closer to Strava and Airbnb than to a council app. Map-first, icon-led, single-handed outdoor use.</p>
+<div class="legend">
+  <span><i class="dot" style="background:#bcd24a"></i>Citrus Lime, primary brand</span>
+  <span><i class="dot" style="background:#dfd3b0"></i>Field Clay, surfaces</span>
+  <span><i class="dot" style="background:#3c4a48"></i>Charcoal, ink</span>
+  <span><i class="dot" style="background:#5a625a"></i>Slate, secondary</span>
+  <span><i class="dot" style="background:#f3b21f"></i>Hazard Amber, alerts</span>
+  <span><i class="dot" style="background:#a9c8d6"></i>Sky Blue, info & water</span>
+  <span><i class="dot" style="background:#f3ecd9;border:1px solid #dcd4b8"></i>Bone, background</span>
+</div>
+<ul class="clean">
+  <li><b>Type:</b> Inter / SF Pro. Display weight only on numbers and headings; everything else 15–17px regular.</li>
+  <li><b>Icons:</b> Custom 24px line set (2px stroke) ,  no emoji. Hazards, livestock, routes, rewards all share the same drawing language.</li>
+  <li><b>Motion:</b> Pulse rings on the FAB and current location, scan-line on photo verification, ring-bursts on credit earn, spring transitions (200–300ms).</li>
+  <li><b>Voice:</b> Short, plainspoken, never bureaucratic. "Path closed ahead" not "Notification of temporary access restriction".</li>
+</ul>
+
+<h2 class="section" id="walker">2 · Walker app ,  key screens</h2>
+<p class="lede">Map-first. Every primary action is one tap from the home map.</p>
+
+<div class="grid">
+
+  <!-- Onboarding -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Welcome to Togro</div>
+      <div class="sub">Choose how you'll use Togro</div>
+      <div class="body">
+        <div class="block"><div class="row"><svg class="ico lg" style="color:var(--accent)"><use href="#i-route"/></svg><div><b>I walk & explore</b><br/><span style="color:var(--muted)">Log hazards, earn credits</span></div></div></div>
+        <div class="block"><div class="row"><svg class="ico lg" style="color:var(--accent)"><use href="#i-fence"/></svg><div><b>I farm or own land</b><br/><span style="color:var(--muted)">Share alerts on my land</span></div></div></div>
+        <div class="block"><div class="row"><svg class="ico lg" style="color:var(--accent)"><use href="#i-store"/></svg><div><b>I run a business</b><br/><span style="color:var(--muted)">Reward visiting walkers</span></div></div></div>
+        <div class="block" style="text-align:center;color:var(--muted)">Sign in</div>
+      </div>
+      <div class="nav">
+        <div class="ni on"><svg class="ico"><use href="#i-user"/></svg>Start</div>
+        <div class="ni"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+        <div class="ni"><svg class="ico"><use href="#i-wallet"/></svg>Wallet</div>
+        <div class="ni"><svg class="ico"><use href="#i-user"/></svg>Me</div>
+      </div>
+    </div></div>
+    <div class="label">Onboarding · role select</div>
+  </div>
+
+  <!-- Map home -->
+  <div>
+    <div class="phone click" onclick="jump(this)">
+      <div class="map">
+        <svg class="path" viewBox="0 0 280 500" preserveAspectRatio="none">
+          <path d="M40 420 C 80 320, 140 360, 170 250 S 230 120, 240 60" stroke="#2f6f4e" stroke-width="3" stroke-dasharray="5 5" fill="none"/>
+        </svg>
+        <div class="pulse" style="top:46%;left:42%"></div>
+        <div class="pin r" style="top:50%;left:48%"></div>
+        <div class="pin h" style="top:30%;left:62%"></div>
+        <div class="pin h" style="top:62%;left:28%"></div>
+        <div class="pin f" style="top:75%;left:55%"></div>
+        <div class="pin r" style="top:20%;left:30%"></div>
+      </div>
+      <div class="topbar">
+        <span class="row" style="gap:6px"><svg class="ico" style="color:var(--accent)"><use href="#i-loc"/></svg>Peak District</span>
+        <span class="credchip"><svg class="ico" style="width:12px;height:12px"><use href="#i-spark"/></svg>14</span>
+      </div>
+      <div class="fab"><svg class="ico lg" style="stroke:#fff"><use href="#i-camera"/></svg></div>
+      <div class="screen" style="background:transparent;border:none">
+        <div class="sbar"><span>9:41</span><span>•••</span></div>
+        <div style="flex:1"></div>
+        <div class="nav" style="background:#fff">
+          <div class="ni on"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+          <div class="ni"><svg class="ico"><use href="#i-route"/></svg>Routes</div>
+          <div class="ni"><svg class="ico"><use href="#i-wallet"/></svg>Wallet</div>
+          <div class="ni"><svg class="ico"><use href="#i-user"/></svg>Me</div>
+        </div>
+      </div>
+    </div>
+    <div class="label">Map home · live hazards & rewards</div>
+  </div>
+
+  <!-- Hazard capture -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen" style="background:#2a332f">
+      <div class="sbar" style="color:#9aa8a0"><span>9:41</span><span>•••</span></div>
+      <div style="flex:1;position:relative;margin:0 12px;border-radius:14px;
+           background:linear-gradient(160deg,#4a5550,#2a332f);overflow:hidden">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        <div class="scan-line"></div>
+        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#fff;font-size:11px;opacity:.8">Hold steady ,  auto-capturing</div>
+      </div>
+      <div style="padding:12px;display:flex;justify-content:space-around;gap:6px">
+        <div class="pill" style="background:#5a6a55;color:#fff"><svg class="ico" style="width:12px;height:12px"><use href="#i-cow"/></svg>Livestock</div>
+        <div class="pill" style="background:#5a6a55;color:#fff"><svg class="ico" style="width:12px;height:12px"><use href="#i-fence"/></svg>Path</div>
+        <div class="pill" style="background:#5a6a55;color:#fff"><svg class="ico" style="width:12px;height:12px"><use href="#i-warn"/></svg>Other</div>
+      </div>
+      <div style="padding:8px 12px 14px;text-align:center">
+        <div style="background:var(--accent);color:var(--charcoal);border-radius:999px;padding:11px;font-size:12px;font-weight:600">Capture & report</div>
+      </div>
+    </div></div>
+    <div class="label">Hazard report · camera-first</div>
+  </div>
+
+  <!-- PHOTO VERIFICATION (new) -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Verifying your report</div>
+      <div class="sub">This usually takes a few seconds</div>
+      <div class="body">
+        <div class="verify-frame">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <div class="scan-line"></div>
+        </div>
+        <div class="progress"><span></span></div>
+        <div class="check-row done"><span class="tick"><svg class="ico" style="width:10px;height:10px;stroke-width:3"><use href="#i-check"/></svg></span>Location confirmed · Stanage Edge</div>
+        <div class="check-row done"><span class="tick"><svg class="ico" style="width:10px;height:10px;stroke-width:3"><use href="#i-check"/></svg></span>Photo is fresh & in focus</div>
+        <div class="check-row done"><span class="tick"><svg class="ico" style="width:10px;height:10px;stroke-width:3"><use href="#i-check"/></svg></span>AI detected: cattle in field</div>
+        <div class="check-row pending"><span class="tick"></span>Cross-checking with nearby walkers…</div>
+      </div>
+    </div></div>
+    <div class="label">Photo verification · live checks</div>
+  </div>
+
+  <!-- VERIFICATION SUCCESS (new) -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Report verified</div>
+      <div class="sub">Thanks ,  other walkers will see this</div>
+      <div class="body">
+        <div class="burst">
+          <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+          <div class="core">+2</div>
+        </div>
+        <div class="block acc" style="text-align:center"><b>2 credits added to your wallet</b></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-shield"/></svg><div><b>Trust score 92</b><br/><span style="color:var(--muted)">Trusted Reporter</span></div></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-coffee"/></svg><div><b>Reward unlocked nearby</b><br/><span style="color:var(--muted)">Free filter coffee · 0.4 km</span></div></div></div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>See reward</b></div>
+      </div>
+    </div></div>
+    <div class="label">Verified · credit awarded</div>
+  </div>
+
+  <!-- Route planning -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Plan a route</div>
+      <div class="body">
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-loc"/></svg><div><b>From</b> Current location</div></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-pin"/></svg><div><b>To</b> Hathersage</div></div></div>
+        <div class="block acc">
+          <div class="row"><svg class="ico"><use href="#i-cpu"/></svg><div><b>Route A · 6.2 km</b><br/>Avoiding 2 hazards · gentle climb</div></div>
+        </div>
+        <div class="block">
+          <div class="row"><svg class="ico" style="color:var(--muted)"><use href="#i-route"/></svg><div><b>Route B · 5.4 km</b><br/><span style="color:var(--muted)">Shortest · crosses livestock zone</span></div></div>
+        </div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Start route</b></div>
+      </div>
+      <div class="nav">
+        <div class="ni"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+        <div class="ni on"><svg class="ico"><use href="#i-route"/></svg>Routes</div>
+        <div class="ni"><svg class="ico"><use href="#i-wallet"/></svg>Wallet</div>
+        <div class="ni"><svg class="ico"><use href="#i-user"/></svg>Me</div>
+      </div>
+    </div></div>
+    <div class="label">AI route planning</div>
+  </div>
+
+  <!-- Wallet -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Wallet</div>
+      <div style="text-align:center;padding:8px 0 4px">
+        <div style="font-size:46px;font-weight:700;color:var(--accent);letter-spacing:-1.5px">14</div>
+        <div style="font-size:11px;color:var(--muted)">credits available</div>
+      </div>
+      <div class="body">
+        <div class="block"><b>Recent activity</b></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-plus"/></svg><div>Hazard verified · Stanage<br/><span style="color:var(--muted)">+2 credits</span></div></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-plus"/></svg><div>Hazard verified · Edale<br/><span style="color:var(--muted)">+2 credits</span></div></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-coffee"/></svg><div>Free coffee · The Old Nag's Head<br/><span style="color:var(--muted)">−4 credits</span></div></div></div>
+        <div class="block acc" style="text-align:center"><b>See rewards near me</b></div>
+      </div>
+      <div class="nav">
+        <div class="ni"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+        <div class="ni"><svg class="ico"><use href="#i-route"/></svg>Routes</div>
+        <div class="ni on"><svg class="ico"><use href="#i-wallet"/></svg>Wallet</div>
+        <div class="ni"><svg class="ico"><use href="#i-user"/></svg>Me</div>
+      </div>
+    </div></div>
+    <div class="label">Credits wallet</div>
+  </div>
+
+  <!-- Rewards marketplace -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Rewards near you</div>
+      <div class="sub">Within 3 km</div>
+      <div class="body">
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-coffee"/></svg><div style="flex:1"><b>Free filter coffee</b><br/><span style="color:var(--muted)">The Old Nag's Head · 0.4 km</span></div><span class="pill acc">4</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-tag"/></svg><div style="flex:1"><b>£2 off Sunday roast</b><br/><span style="color:var(--muted)">The Rambler Inn · 1.1 km</span></div><span class="pill acc">8</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-leaf"/></svg><div style="flex:1"><b>Free slice of cake</b><br/><span style="color:var(--muted)">Cloudside Café · 2.3 km</span></div><span class="pill acc">5</span></div></div>
+      </div>
+      <div class="nav">
+        <div class="ni"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+        <div class="ni"><svg class="ico"><use href="#i-route"/></svg>Routes</div>
+        <div class="ni on"><svg class="ico"><use href="#i-wallet"/></svg>Wallet</div>
+        <div class="ni"><svg class="ico"><use href="#i-user"/></svg>Me</div>
+      </div>
+    </div></div>
+    <div class="label">Rewards marketplace</div>
+  </div>
+
+  <!-- Redemption -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Redeem reward</div>
+      <div class="body">
+        <div class="block" style="text-align:center"><b>Free filter coffee</b><br/><span style="color:var(--muted)">The Old Nag's Head</span></div>
+        <div style="margin:6px auto;width:130px;height:130px;background:repeating-conic-gradient(var(--charcoal) 0 25%,#fff 0 50%) 50%/14px 14px;border:6px solid #fff;border-radius:10px;box-shadow:0 6px 16px -8px rgba(0,0,0,.3)"></div>
+        <div class="block" style="text-align:center;color:var(--muted)"><div class="row" style="justify-content:center"><svg class="ico" style="color:var(--accent)"><use href="#i-clock"/></svg>Expires in 04:58</div></div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Confirm redemption</b></div>
+      </div>
+    </div></div>
+    <div class="label">Redemption · QR + countdown</div>
+  </div>
+
+</div>
+
+<h2 class="section" id="verify">3 · Photo verification ,  how it works</h2>
+<p class="lede">A trustworthy hazard report is the foundation of the credits economy. The verification system runs invisibly in seconds and combines four signals.</p>
+
+<div class="twocol">
+  <div>
+    <table>
+      <tr><th>Signal</th><th>What it checks</th><th>Why</th></tr>
+      <tr><td>GPS & motion</td><td>Phone is physically at the hazard, not spoofed; accelerometer matches walking</td><td>Stops armchair reporters</td></tr>
+      <tr><td>Photo freshness</td><td>EXIF timestamp within 60s, no screenshots, no re-uploads</td><td>Stops recycled images</td></tr>
+      <tr><td>On-device ML</td><td>Detects: cattle, sheep, fallen tree, fence, fire, blocked path, dog</td><td>Auto-classifies & rejects blanks</td></tr>
+      <tr><td>Cross-report</td><td>Second independent walker within 24h on same pin</td><td>Auto-promotes to Verified</td></tr>
+      <tr><td>User trust score</td><td>0–100, decays with rejected reports</td><td>Trusted users skip the queue</td></tr>
+    </table>
+
+    <h3>States a report can be in</h3>
+    <ul class="clean">
+      <li><b>Pending</b> ,  visible only to the reporter, no credits yet.</li>
+      <li><b>Auto-verified</b> ,  ML + cross-report agree → live on the map, credits awarded.</li>
+      <li><b>Needs review</b> ,  single source, low ML confidence, or low-trust user → admin queue.</li>
+      <li><b>Cleared</b> ,  another walker confirms it's gone → original reporter earns +1.</li>
+      <li><b>Rejected</b> ,  admin or ML flagged spam → −2 credits & trust hit.</li>
+    </ul>
+  </div>
+  <div>
+    <div class="callout">
+      <b>Why this UX matters</b><br/>
+      Walkers see the verification process happening in front of them ,  scan-line, ticking checks, ring burst on success. It feels transparent and rewarding, not like a black box. They learn what makes a "good" report just by watching it work.
+    </div>
+    <div class="callout">
+      <b>Privacy guardrails</b><br/>
+      Faces and number plates are blurred on-device before upload. Photos containing only people are auto-rejected. EXIF GPS is stripped from publicly displayed images.
+    </div>
+  </div>
+</div>
+
+<h2 class="section" id="farmer">4 · Farmer app ,  key screens</h2>
+<p class="lede">Two screens, large taps, no jargon. Built for a phone in muddy hands.</p>
+
+<div class="grid">
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">My land</div>
+      <div class="sub">Hill Top Farm · 142 acres</div>
+      <div class="body">
+        <div class="block acc"><b>Active alerts (2)</b></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-cow"/></svg><div><b>Cows with calves · West field</b><br/><span style="color:var(--muted)">Until Mon</span></div></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-fence"/></svg><div><b>Bridleway closed · storm damage</b><br/><span style="color:var(--muted)">Until further notice</span></div></div></div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Add alert</b></div>
+      </div>
+      <div class="nav">
+        <div class="ni on"><svg class="ico"><use href="#i-fence"/></svg>Land</div>
+        <div class="ni"><svg class="ico"><use href="#i-warn"/></svg>Alerts</div>
+        <div class="ni"><svg class="ico"><use href="#i-user"/></svg>Me</div>
+      </div>
+    </div></div>
+    <div class="label">Farmer dashboard</div>
+  </div>
+
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">New alert</div>
+      <div class="body">
+        <div class="block"><b>What's happening?</b></div>
+        <div class="row" style="flex-wrap:wrap;gap:6px;margin:6px 0">
+          <span class="pill"><svg class="ico" style="width:12px;height:12px"><use href="#i-cow"/></svg>Cattle</span>
+          <span class="pill"><svg class="ico" style="width:12px;height:12px"><use href="#i-leaf"/></svg>Sheep</span>
+          <span class="pill"><svg class="ico" style="width:12px;height:12px"><use href="#i-fence"/></svg>Closure</span>
+          <span class="pill"><svg class="ico" style="width:12px;height:12px"><use href="#i-fire"/></svg>Fire risk</span>
+          <span class="pill"><svg class="ico" style="width:12px;height:12px"><use href="#i-warn"/></svg>Other</span>
+        </div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-pin"/></svg><div><b>Where?</b> Tap on map</div></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-clock"/></svg><div><b>How long?</b> Today / This week / Until removed</div></div></div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Publish alert</b></div>
+      </div>
+    </div></div>
+    <div class="label">Add livestock / closure alert</div>
+  </div>
+</div>
+
+<h2 class="section" id="plugins">4b · Farmer plugins, scheduling & inbox</h2>
+<p class="lede">Farmers shouldn't double-enter anything. Togro reads from the tools they already use (Herdwatch, Breedr, AgriWebb, FieldMargin, Google Calendar, BCMS) and turns events into one-tap walker alerts.</p>
+
+<div class="grid">
+
+  <!-- Connected apps -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Connected apps</div>
+      <div class="sub">Plug Togro into your farm tools</div>
+      <div class="body">
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-cow"/></svg><div style="flex:1"><b>Herdwatch</b><br/><span style="color:var(--muted)">Livestock & movements</span></div><span class="pill acc">Connected</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-leaf"/></svg><div style="flex:1"><b>FieldMargin</b><br/><span style="color:var(--muted)">Field ops & notes</span></div><span class="pill acc">Connected</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--muted)"><use href="#i-clock"/></svg><div style="flex:1"><b>Google Calendar</b><br/><span style="color:var(--muted)">Spraying, gathering days</span></div><span class="pill">Connect</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--muted)"><use href="#i-fence"/></svg><div style="flex:1"><b>AgriWebb</b><br/><span style="color:var(--muted)">Paddocks & grazing</span></div><span class="pill">Connect</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--muted)"><use href="#i-shield"/></svg><div style="flex:1"><b>BCMS / ScotEID</b><br/><span style="color:var(--muted)">Cattle movement records</span></div><span class="pill">Connect</span></div></div>
+        <div class="block" style="text-align:center;color:var(--muted)">Browse all plugins</div>
+      </div>
+      <div class="nav">
+        <div class="ni"><svg class="ico"><use href="#i-fence"/></svg>Land</div>
+        <div class="ni"><svg class="ico"><use href="#i-warn"/></svg>Alerts</div>
+        <div class="ni on"><svg class="ico"><use href="#i-cpu"/></svg>Plugins</div>
+      </div>
+    </div></div>
+    <div class="label">Connected apps · plugin marketplace</div>
+  </div>
+
+  <!-- Suggested alerts inbox -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Suggested alerts</div>
+      <div class="sub">From your connected apps · 3 new</div>
+      <div class="body">
+        <div class="block">
+          <div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-cow"/></svg><div style="flex:1"><b>Cows + calves moved to West field</b><br/><span style="color:var(--muted)">Herdwatch · 06:42</span></div></div>
+          <div class="row" style="margin-top:8px;gap:6px"><span class="pill acc">Publish</span><span class="pill">Edit</span><span class="pill">Dismiss</span></div>
+        </div>
+        <div class="block">
+          <div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-leaf"/></svg><div style="flex:1"><b>Spraying scheduled Tue 06:00–10:00</b><br/><span style="color:var(--muted)">FieldMargin</span></div></div>
+          <div class="row" style="margin-top:8px;gap:6px"><span class="pill acc">Publish</span><span class="pill">Edit</span><span class="pill">Dismiss</span></div>
+        </div>
+        <div class="block">
+          <div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-fence"/></svg><div style="flex:1"><b>Beating day · Sat 08:00–14:00</b><br/><span style="color:var(--muted)">Google Calendar</span></div></div>
+          <div class="row" style="margin-top:8px;gap:6px"><span class="pill acc">Publish</span><span class="pill">Edit</span><span class="pill">Dismiss</span></div>
+        </div>
+        <div class="block acc" style="text-align:center"><b>Auto-publish rules →</b></div>
+      </div>
+      <div class="nav">
+        <div class="ni"><svg class="ico"><use href="#i-fence"/></svg>Land</div>
+        <div class="ni on"><svg class="ico"><use href="#i-warn"/></svg>Alerts</div>
+        <div class="ni"><svg class="ico"><use href="#i-cpu"/></svg>Plugins</div>
+      </div>
+    </div></div>
+    <div class="label">Suggested alerts inbox</div>
+  </div>
+
+  <!-- Scheduling / calendar -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Schedule</div>
+      <div class="sub">April · Hill Top Farm</div>
+      <div class="body">
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:9px;color:var(--muted);text-align:center;margin:4px 0">
+          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:9px;text-align:center">
+          <span style="padding:6px 0">1</span><span style="padding:6px 0">2</span>
+          <span style="padding:6px 0;background:var(--warn-soft);color:var(--warn);border-radius:6px">3</span>
+          <span style="padding:6px 0">4</span><span style="padding:6px 0">5</span>
+          <span style="padding:6px 0;background:var(--accent);color:var(--charcoal);border-radius:6px">6</span>
+          <span style="padding:6px 0">7</span>
+          <span style="padding:6px 0;background:var(--warn-soft);color:var(--warn);border-radius:6px">8</span>
+          <span style="padding:6px 0">9</span><span style="padding:6px 0">10</span>
+          <span style="padding:6px 0;background:var(--accent-soft);color:var(--accent);border-radius:6px">11</span>
+          <span style="padding:6px 0">12</span>
+          <span style="padding:6px 0;background:var(--warn-soft);color:var(--warn);border-radius:6px">13</span>
+          <span style="padding:6px 0">14</span>
+        </div>
+        <div class="block" style="margin-top:10px"><div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-leaf"/></svg><div><b>Tue · Spraying</b><br/><span style="color:var(--muted)">Recurring · 06:00–10:00</span></div></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-cow"/></svg><div><b>Sat · Gathering day</b><br/><span style="color:var(--muted)">One-off · 08:00–14:00</span></div></div></div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Schedule new alert</b></div>
+      </div>
+    </div></div>
+    <div class="label">Schedule · pre-plan & recurring alerts</div>
+  </div>
+
+</div>
+
+<div class="twocol" style="margin-top:24px">
+  <div>
+    <h3>How the plugin model works</h3>
+    <ul class="clean">
+      <li><b>Connect once</b> via OAuth (or API key / CSV fallback). Farmer chooses exactly which data flows in.</li>
+      <li><b>Suggested, not automatic.</b> Events land in an inbox. One tap to publish, edit, or dismiss. After repeated patterns, farmer can flip specific event types to auto-publish.</li>
+      <li><b>Two-way sync.</b> Walker reports on the farmer's land (open gate, injured sheep, fly-tipping) push back into the connected tool as a task or note.</li>
+      <li><b>Land model.</b> Field parcels imported once from RPA/SBI or KML so alerts attach to a real field, not a dropped pin.</li>
+      <li><b>Audit trail.</b> Every published alert is timestamped and signed ,  useful for NFU / insurance after an incident.</li>
+    </ul>
+  </div>
+  <div>
+    <div class="callout">
+      <b>Launch partners to target</b><br/>
+      Herdwatch, Breedr, AgriWebb, FieldMargin, Farmplan/Gatekeeper, Agrimetrics, BCMS / ScotEID / WLBP, Google & Outlook Calendar, WhatsApp (one-way bridge). A small public webhook spec lets any UK ag-tech vendor build their own Togro connector.
+    </div>
+  </div>
+</div>
+
+<h2 class="section" id="hub">4c · Farmer hub & the privacy sanitiser</h2>
+<p class="lede">The farmer hub is a single private workspace pulling every connected app into one view. Togro analyses that data and turns it into safe, public-facing hazards, never exposing exact livestock counts, animal IDs, farmhouse locations, valuable equipment or anything an opportunist could use.</p>
+
+<div class="grid">
+
+  <!-- Farmer hub -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Farm hub</div>
+      <div class="sub">Hill Top Farm, all sources</div>
+      <div class="body">
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-cow"/></svg><div style="flex:1"><b>142 cattle</b><br/><span style="color:var(--muted)">Herdwatch, live</span></div><span class="pill">Private</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-leaf"/></svg><div style="flex:1"><b>4 fields in rotation</b><br/><span style="color:var(--muted)">FieldMargin</span></div><span class="pill">Private</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-clock"/></svg><div style="flex:1"><b>Spraying Tue 06:00</b><br/><span style="color:var(--muted)">Calendar</span></div><span class="pill acc">Public alert</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-fence"/></svg><div style="flex:1"><b>Bridleway storm damage</b><br/><span style="color:var(--muted)">You, 2 days ago</span></div><span class="pill acc">Public alert</span></div></div>
+        <div class="block acc" style="text-align:center"><b>What's public, what's private</b></div>
+      </div>
+      <div class="nav">
+        <div class="ni on"><svg class="ico"><use href="#i-fence"/></svg>Hub</div>
+        <div class="ni"><svg class="ico"><use href="#i-warn"/></svg>Alerts</div>
+        <div class="ni"><svg class="ico"><use href="#i-cpu"/></svg>Plugins</div>
+      </div>
+    </div></div>
+    <div class="label">Farm hub · all data, one place</div>
+  </div>
+
+  <!-- Sanitiser -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Public preview</div>
+      <div class="sub">How walkers will see this</div>
+      <div class="body">
+        <div class="block"><b>Your data</b><br/><span style="color:var(--muted)">142 Limousin cattle, 38 with calves, North Pasture (54.367, ,1.832), worth £180k</span></div>
+        <div class="block acc" style="text-align:center"><svg class="ico" style="color:var(--accent)"><use href="#i-shield"/></svg> <b>Sanitised by Togro</b></div>
+        <div class="block" style="background:var(--warn-soft);border-color:var(--warn)">
+          <div class="row"><svg class="ico" style="color:var(--warn)"><use href="#i-cow"/></svg><div><b>Cows with calves ahead</b><br/><span style="color:var(--muted)">Keep dogs on leads, give space</span></div></div>
+        </div>
+        <div class="check-row done"><span class="tick"><svg class="ico" style="width:10px;height:10px;stroke-width:3"><use href="#i-check"/></svg></span>Exact count hidden</div>
+        <div class="check-row done"><span class="tick"><svg class="ico" style="width:10px;height:10px;stroke-width:3"><use href="#i-check"/></svg></span>Location fuzzed to 200m</div>
+        <div class="check-row done"><span class="tick"><svg class="ico" style="width:10px;height:10px;stroke-width:3"><use href="#i-check"/></svg></span>Breed and value never shown</div>
+        <div class="check-row done"><span class="tick"><svg class="ico" style="width:10px;height:10px;stroke-width:3"><use href="#i-check"/></svg></span>Farmhouse area excluded</div>
+      </div>
+    </div></div>
+    <div class="label">Privacy sanitiser · before & after</div>
+  </div>
+
+  <!-- Privacy controls -->
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Privacy controls</div>
+      <div class="sub">You decide what's safe to share</div>
+      <div class="body">
+        <div class="block"><div class="row"><div style="flex:1"><b>Location precision</b><br/><span style="color:var(--muted)">Field, 50m, 200m, 500m</span></div><span class="pill acc">200m</span></div></div>
+        <div class="block"><div class="row"><div style="flex:1"><b>Show animal counts</b></div><span class="pill">Off</span></div></div>
+        <div class="block"><div class="row"><div style="flex:1"><b>Show breed / value</b></div><span class="pill">Off</span></div></div>
+        <div class="block"><div class="row"><div style="flex:1"><b>Hide farmhouse zone</b></div><span class="pill acc">On, 300m</span></div></div>
+        <div class="block"><div class="row"><div style="flex:1"><b>Hide equipment store</b></div><span class="pill acc">On</span></div></div>
+        <div class="block"><div class="row"><div style="flex:1"><b>Quiet hours</b><br/><span style="color:var(--muted)">No alerts published 22:00, 06:00</span></div><span class="pill acc">On</span></div></div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Save</b></div>
+      </div>
+    </div></div>
+    <div class="label">Privacy controls · per farm</div>
+  </div>
+
+</div>
+
+<div class="twocol" style="margin-top:24px">
+  <div>
+    <h3>How the sanitiser works</h3>
+    <ul class="clean">
+      <li><b>Strip identifiers.</b> Animal IDs, ear tags, breed, exact counts, valuations, owner names are never sent to the public layer.</li>
+      <li><b>Fuzz the location.</b> Default 200m radius around the real point. Farmer can tighten or loosen per farm.</li>
+      <li><b>Exclude sensitive zones.</b> Farmhouse, equipment store, fuel tanks and high-value paddocks are drawn once and permanently masked from the public map.</li>
+      <li><b>Translate to walker language.</b> "Holstein heifers in calf, paddock 7" becomes "Cows with calves ahead, keep dogs on leads."</li>
+      <li><b>Quiet hours.</b> Nothing publishes overnight, so a published alert never doubles as a "no one is watching" signal.</li>
+      <li><b>Per-alert preview.</b> Farmer always sees the public version before it goes live, with a one-tap "this is too much, hide".</li>
+      <li><b>Audit log.</b> Every published alert and every redacted field is timestamped, signed, and exportable for NFU Mutual or police.</li>
+    </ul>
+  </div>
+  <div>
+    <div class="callout">
+      <b>Why this matters</b><br/>
+      Rural crime is a real cost, livestock theft, machinery theft, hare coursing. A naive hazard map could accidentally tell a thief exactly where the valuable cows are tonight. Togro's job is to give walkers enough to stay safe and respectful, while giving farmers a guarantee that their operational data stays operational.
+    </div>
+    <div class="callout">
+      <b>Reconfirmation also uses the camera</b><br/>
+      The "Still here / Not there" prompt now requires a quick photo. Same verification pipeline as a fresh report, same +1 credit, same trust score impact. No photo means no credit, which keeps drive-by tapping out of the loop.
+    </div>
+  </div>
+</div>
+
+<h2 class="section" id="business">5 · Business app ,  key screens</h2>
+<p class="lede">A landlord should be able to create their first reward in under 30 seconds.</p>
+
+<div class="grid">
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">The Old Nag's Head</div>
+      <div class="sub">Edale · claimed 4 Mar</div>
+      <div class="body">
+        <div class="row" style="gap:6px;margin:6px 0">
+          <div class="block" style="flex:1;text-align:center"><b style="font-size:18px">38</b><br/><span style="color:var(--muted);font-size:10px">redemptions</span></div>
+          <div class="block" style="flex:1;text-align:center"><b style="font-size:18px">£412</b><br/><span style="color:var(--muted);font-size:10px">est. spend</span></div>
+        </div>
+        <div class="block"><b>Active rewards</b></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-coffee"/></svg><div style="flex:1">Free filter coffee</div><span class="pill acc">4</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-tag"/></svg><div style="flex:1">£2 off Sunday roast</div><span class="pill acc">8</span></div></div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>New reward</b></div>
+      </div>
+      <div class="nav">
+        <div class="ni on"><svg class="ico"><use href="#i-store"/></svg>Shop</div>
+        <div class="ni"><svg class="ico"><use href="#i-chart"/></svg>Stats</div>
+        <div class="ni"><svg class="ico"><use href="#i-camera"/></svg>Scan</div>
+      </div>
+    </div></div>
+    <div class="label">Business dashboard</div>
+  </div>
+
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">New reward</div>
+      <div class="body">
+        <div class="block"><b>Offer</b><br/><span style="color:var(--muted)">e.g. Free filter coffee</span></div>
+        <div class="block"><div class="row"><div style="flex:1"><b>Credit cost</b></div><span class="pill acc">4</span></div></div>
+        <div class="block"><div class="row"><svg class="ico" style="color:var(--accent)"><use href="#i-clock"/></svg><div><b>Available</b> Mon–Fri, 9–5</div></div></div>
+        <div class="block"><b>Limit</b> 20 per day</div>
+        <div class="block acc"><b>Preview</b><br/>Free filter coffee · 4 credits</div>
+        <div class="block" style="text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Publish</b></div>
+      </div>
+    </div></div>
+    <div class="label">Create reward · &lt;30s</div>
+  </div>
+
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Scan to redeem</div>
+      <div class="body" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div style="position:relative;width:170px;height:170px;border-radius:16px;
+                    background:linear-gradient(160deg,#4a5550,#2a332f);overflow:hidden">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <div class="scan-line"></div>
+        </div>
+        <div style="margin-top:10px;color:var(--muted);font-size:11px">Point at the walker's QR code</div>
+      </div>
+      <div class="block" style="margin:0 12px 12px;text-align:center;background:var(--charcoal);color:#fff;border-color:var(--charcoal)">Enter code manually</div>
+    </div></div>
+    <div class="label">Staff redemption scanner</div>
+  </div>
+</div>
+
+<h2 class="section" id="admin">6 · Admin dashboard ,  web</h2>
+<p class="lede">Built for moderation speed and trust. Keyboard-first, bulk actions, clear audit trail.</p>
+
+<div class="desktop">
+  <div class="chrome"><i></i><i></i><i></i></div>
+  <div class="dbody">
+    <div class="dside">
+      <h4>Togro Admin</h4>
+      <div class="item on"><svg class="ico"><use href="#i-flag"/></svg>Moderation</div>
+      <div class="item"><svg class="ico"><use href="#i-user"/></svg>Users</div>
+      <div class="item"><svg class="ico"><use href="#i-store"/></svg>Businesses</div>
+      <div class="item"><svg class="ico"><use href="#i-spark"/></svg>Credits & rules</div>
+      <div class="item"><svg class="ico"><use href="#i-chart"/></svg>Analytics</div>
+      <div class="item"><svg class="ico"><use href="#i-shield"/></svg>Trust & safety</div>
+    </div>
+    <div class="dmain">
+      <div>
+        <div class="stat"><b>1,284</b><span>Active walkers (7d)</span></div>
+        <div class="stat"><b>312</b><span>Hazards pending</span></div>
+        <div class="stat"><b>4,210</b><span>Credits issued</span></div>
+        <div class="stat"><b>1,870</b><span>Credits redeemed</span></div>
+        <div class="stat"><b>44%</b><span>Redemption rate</span></div>
+      </div>
+      <h3 style="margin-top:18px">Moderation queue</h3>
+      <div class="qrow"><div class="qthumb"></div>Cows with calves · Stanage · 2 reporters<span class="pill acc">Auto-verify</span></div>
+      <div class="qrow"><div class="qthumb"></div>Fallen tree · Edale · 1 reporter<span class="pill">Review</span></div>
+      <div class="qrow"><div class="qthumb"></div>"Path closed" · Hathersage · 1 reporter<span class="pill warn">Low trust</span></div>
+      <div class="qrow"><div class="qthumb"></div>Loose dog · Castleton · 3 reporters<span class="pill acc">Auto-verify</span></div>
+      <div class="qrow"><div class="qthumb"></div>Blank image · Bakewell<span class="pill warn">Spam suspect</span></div>
+    </div>
+  </div>
+</div>
+
+<h2 class="section">7 · End-to-end UX flows</h2>
+
+<div class="twocol">
+  <div>
+    <h3>Walker ,  earn & redeem loop</h3>
+    <ol>
+      <li>Open app → map home (location, nearby hazards, credits visible top-right).</li>
+      <li>Tap pulsing camera FAB → camera opens instantly, GPS captured silently.</li>
+      <li>Tap a hazard chip (livestock / path / fire / other), submit.</li>
+      <li>Verification screen runs scan-line + live checks: location, freshness, ML, cross-report.</li>
+      <li>Ring-burst success animation: "+2 credits, Trusted Reporter".</li>
+      <li>Wallet shows balance growing; nearest reachable reward surfaces.</li>
+      <li>Tap reward → confirm cost → QR + 5-min countdown → staff scans → success.</li>
+    </ol>
+
+    <h3>Farmer ,  alert flow</h3>
+    <ol>
+      <li>Open app → "My land" with active alerts.</li>
+      <li>Add alert → pick icon → tap map area → choose duration → publish.</li>
+      <li>Walkers within 5 km routing through that area get a re-route prompt.</li>
+      <li>Alert auto-expires; farmer gets a one-tap "Still active?" reminder.</li>
+    </ol>
+
+    <h3>Business ,  claim & reward flow</h3>
+    <ol>
+      <li>Search address → "Claim this business" → email/phone verify.</li>
+      <li>Create first reward in &lt;30s using a template (coffee / discount / bundle).</li>
+      <li>Reward goes live on the walker map; ROI dashboard tracks footfall.</li>
+      <li>Staff opens "Scan" tab at the till to redeem walker QR codes.</li>
+    </ol>
+
+    <h3>Admin ,  moderation flow</h3>
+    <ol>
+      <li>Queue auto-prioritised: low-trust users + single-source reports first.</li>
+      <li>Keyboard shortcuts: A approve · R reject · F flag · B ban reporter.</li>
+      <li>Bulk-select duplicates within 50 m / 30 min for one-click merge.</li>
+      <li>Every action logged with reason; reversible for 24 h.</li>
+    </ol>
+  </div>
+
+  <div>
+    <div class="callout">
+      <b>Interaction principles</b>
+      <ul class="clean">
+        <li>Camera and report are always one tap from anywhere.</li>
+        <li>Pulse rings on the FAB and current location signal "live".</li>
+        <li>Scan-line animation during photo verification builds trust.</li>
+        <li>Ring-burst on credit earn ,  a small physical celebration.</li>
+        <li>Offline: queued reports sync when signal returns; wallet works offline.</li>
+        <li>Outdoor mode auto-engages in bright sun (high contrast, larger taps).</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h2 class="section" id="lifecycle">7b · Hazard lifecycle, decay & reconfirmation</h2>
+<p class="lede">A hazard is not a permanent pin. Every report has a half-life. The map only shows fresh, trusted information, and walkers earn small credits for keeping it that way.</p>
+
+<div class="twocol">
+  <div>
+    <h3>Decay model</h3>
+    <ul class="clean">
+      <li>Each hazard type has a default time-to-live: livestock 48h, fallen tree 14d, path closure 7d, fire risk 24h, loose dog 6h.</li>
+      <li>Confidence decays linearly from 100% on day zero to 0% at TTL. Pin opacity on the map fades in step.</li>
+      <li>At 50% confidence the system asks the next walker who routes within 100m: "Is this still here?" One tap: Still here, Gone, Not sure.</li>
+      <li>"Still here" resets confidence to 100% and extends TTL. The original reporter gets +1, the confirmer gets +1.</li>
+      <li>"Gone" drops confidence to zero, archives the pin, and credits the confirmer +1 for clearing it.</li>
+      <li>No confirmation by TTL: pin auto-archives silently, no penalty to the original reporter.</li>
+    </ul>
+
+    <h3>Who can report, and how credits work</h3>
+    <table>
+      <tr><th>Role</th><th>Can report?</th><th>Earns credits?</th><th>Why</th></tr>
+      <tr><td>Walker</td><td>Yes, anywhere</td><td>Yes</td><td>Core contributor loop</td></tr>
+      <tr><td>Farmer</td><td>Yes, on owned/connected land</td><td>No, but earns trust score and insurance audit log</td><td>They already benefit, credits would be a conflict of interest</td></tr>
+      <tr><td>Business</td><td>Yes, within a defined radius of their venue</td><td>No, but reports auto-trusted</td><td>Local eyes, same logic as farmers</td></tr>
+      <tr><td>Council / ranger</td><td>Yes, anywhere in their patch</td><td>No, official source</td><td>Reports skip the queue and auto-verify</td></tr>
+    </table>
+    <p class="lede">Farmer and business reports are marked with a small "verified source" badge on the walker map so users see they came from the landowner directly.</p>
+
+    <h3>Access type, every pin and route knows it</h3>
+    <ul class="clean">
+      <li><b>Public right of way</b>, footpath, bridleway, byway, restricted byway. Default open access.</li>
+      <li><b>Permissive path</b>, landowner allows access at their discretion. Can be revoked or scheduled (e.g. closed during lambing).</li>
+      <li><b>CROW open access land</b>, mapped under the Countryside and Rights of Way Act.</li>
+      <li><b>Private with consent</b>, walker must have a token from the landowner (e.g. shoot syndicate, fishing beat).</li>
+      <li><b>No access</b>, drawn for routing only, never suggested to walkers.</li>
+    </ul>
+    <p class="lede">Farmers can flip a permissive path to "closed today" with one tap, and the routing engine instantly re-routes anyone heading that way. Walkers see a soft amber banner: "This permissive path is closed by the landowner until tomorrow, thanks for respecting it."</p>
+  </div>
+
+  <div>
+    <div class="phone click" onclick="jump(this)"><div class="screen">
+      <div class="sbar"><span>9:41</span><span>•••</span></div>
+      <div class="ttl">Quick check</div>
+      <div class="sub">You're near a reported hazard</div>
+      <div class="body">
+        <div class="block" style="text-align:center;background:var(--warn-soft);border-color:var(--warn)">
+          <svg class="ico lg" style="color:var(--warn)"><use href="#i-cow"/></svg>
+          <div style="margin-top:6px"><b>Cows with calves</b><br/><span style="color:var(--muted)">Reported 31h ago, West field</span></div>
+        </div>
+        <div class="block" style="text-align:center"><b>Take a quick photo to confirm</b></div>
+        <div class="verify-frame" style="height:110px;margin:6px 0">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <div class="scan-line"></div>
+        </div>
+        <div class="row" style="gap:6px;margin:6px 0">
+          <div class="block" style="flex:1;text-align:center;background:var(--accent);color:var(--charcoal);border-color:var(--accent)"><b>Still here</b><br/><span style="font-size:9px">photo +1</span></div>
+          <div class="block" style="flex:1;text-align:center"><b>Not there</b><br/><span style="font-size:9px;color:var(--muted)">photo +1</span></div>
+        </div>
+        <div class="block" style="text-align:center;color:var(--muted);font-size:10px">Photo verifies it for everyone, no photo, no credit</div>
+      </div>
+    </div></div>
+    <div class="label">Reconfirmation · photo verified</div>
+
+    <div class="callout" style="margin-top:14px">
+      <b>Why decay matters</b><br/>
+      Stale hazards are worse than no hazards, walkers stop trusting the map. Decay plus reconfirmation keeps the data fresh without anyone needing to babysit it, and gives walkers a second, lower-friction way to earn credits beyond first-time reporting.
+    </div>
+  </div>
+</div>
+
+<h2 class="section" id="credits">8 · Credits economy ,  design in detail</h2>
+
+<table>
+  <tr><th>Action</th><th>Credits</th><th>Conditions</th></tr>
+  <tr><td>Verified hazard report</td><td>+2</td><td>Confirmed by ML or 2nd reporter</td></tr>
+  <tr><td>First report of the day</td><td>+1 bonus</td><td>Streak builder</td></tr>
+  <tr><td>Photo with livestock or closure</td><td>+1 bonus</td><td>Higher signal value</td></tr>
+  <tr><td>Hazard cleared confirmation</td><td>+1</td><td>Walker re-passes the pin and confirms</td></tr>
+  <tr><td>Weekly streak (5 days active)</td><td>+5</td><td>Encourages habit</td></tr>
+  <tr><td>Rejected / spam report</td><td>−2 + trust hit</td><td>Anti-abuse</td></tr>
+</table>
+
+<h3>Anti-abuse logic</h3>
+<ul class="clean">
+  <li><b>Trust score per user</b> (0–100). Drives queue priority and reward eligibility.</li>
+  <li><b>GPS sanity:</b> phone must physically be at the hazard location; speed and accelerometer cross-checked.</li>
+  <li><b>Photo ML:</b> blur, duplicate, screenshot, indoor scene detection.</li>
+  <li><b>Cross-verification window:</b> single report = "pending"; two independent reports within 24h auto-verify.</li>
+  <li><b>Daily earnable cap</b> (e.g. 12/day) to prevent farming.</li>
+  <li><b>Per-location cool-down:</b> same hazard from same user within 2h ignored.</li>
+  <li><b>Redemption fraud:</b> rotating QR codes, single-use, server-validated, business-scanner pairing.</li>
+</ul>
+
+<h3>Business ROI guarantees</h3>
+<ul class="clean">
+  <li><b>Footfall attribution:</b> dashboard shows redemptions, est. spend lift, repeat visits.</li>
+  <li><b>Simple economics:</b> business sets the credit cost ,  Togro never gives away their margin.</li>
+  <li><b>Reward caps:</b> per-day limits prevent oversubscription.</li>
+  <li><b>Quiet-day boost:</b> businesses can 2× credits on Tuesdays to drive demand when they want it.</li>
+  <li><b>Monthly summary email:</b> three numbers ,  redemptions, new visitors, repeat visitors.</li>
+</ul>
+
+<h2 class="section">9 · Engagement & retention loops</h2>
+<ul class="clean">
+  <li><b>Streaks:</b> "5-day walker" badge, gentle nudge if a streak is about to break.</li>
+  <li><b>Local leaderboards:</b> "Top contributors near Edale this week" ,  pride, not pressure.</li>
+  <li><b>Seasonal challenges:</b> "Spring lambing watch ,  log 5 livestock alerts, earn a free pint."</li>
+  <li><b>Surprise drops:</b> occasional "Mystery reward unlocked" push to keep the loop fresh.</li>
+  <li><b>Community trust badges:</b> Trusted Reporter, Local Guide, Path Guardian.</li>
+  <li><b>Walker ↔ farmer thank-yous:</b> farmers can send a one-tap "Thanks for the heads-up" + 1 credit tip.</li>
+  <li><b>Re-engagement:</b> if you walk past an unredeemed reward, a soft notification fires once.</li>
+</ul>
+
+<h2 class="section">10 · MVP cut</h2>
+<ol>
+  <li>Walker: map, hazard report, photo verification, wallet, rewards near me, redeem QR.</li>
+  <li>Business: claim, create reward, scan to redeem, basic ROI counters.</li>
+  <li>Admin: moderation queue with keyboard shortcuts and trust scores.</li>
+  <li>Farmer alerts as a lightweight v1 (icon + map area + duration only).</li>
+</ol>
+
+</div>
+
+<script>
+function jump(el){
+  const label=el.parentElement.querySelector('.label')?.innerText.toLowerCase()||'';
+  const map=[
+    ['verif','#verify'],['camera','#verify'],['hazard','#verify'],
+    ['onboard','#walker'],['map home','#walker'],['route','#walker'],
+    ['wallet','#credits'],['rewards','#business'],['redem','#business'],
+    ['farmer','#farmer'],['land','#farmer'],['alert','#plugins'],
+    ['plugin','#plugins'],['connect','#plugins'],['suggest','#plugins'],
+    ['schedule','#plugins'],['hub','#hub'],['privacy','#hub'],['public preview','#hub'],
+    ['business','#business'],['scan','#business'],['reward','#business'],
+    ['reconfirm','#lifecycle'],['quick check','#lifecycle']
+  ];
+  for(const [k,h] of map){if(label.includes(k)){location.hash=h;return}}
+}
+</script>
+</body>
+</html>
